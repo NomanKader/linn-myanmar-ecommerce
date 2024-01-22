@@ -11,14 +11,17 @@ const theme = createTheme({
         main:'#ECF6FF'
       },
       text:{
-        main:'#fff'
+        main:'#ca1228'
       },
       success:{
         main:'#008080'
       },
       warning:{
         main:'#FFA700'
-      }
+      },
+      background:{
+        main:'#ecedf0'
+      },
       
     },
   });
