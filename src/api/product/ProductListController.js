@@ -2,7 +2,7 @@ import axios from "axios";
 const ProductListAPI=async(setProductList)=>{
    await axios({
         method: 'post',
-        url: 'https://api.linnmyanmar.com.mm/dev/public/products/FLASH_SALE',
+        url: 'https://api.linnmyanmar.com.mm/dev/public/products/BEST_SELLER',
         params: {
           page: 0,
           size: 10,

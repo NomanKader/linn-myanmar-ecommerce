@@ -5,6 +5,7 @@ import ShowAllGridComponent from '../../components/Grid/ShowAllGridComponent';
 import BottomNavigationBarComponent from '../../components/NavigationBar/BottomNavigationBarComponent'
 import CircularProgressComponent from '../../components/Progress/CircularProgressComponent';
 import ProductListAPI from '../../api/product/ProductListController';
+import FilterDrawerComponent from '../../components/Drawer/FilterDrawerComponent';
 export default function ShowAllPage({history}) {
     const [request, setRequest] = useState(null);
     const [productList, setProductList] = useState(null);
@@ -20,9 +21,9 @@ export default function ShowAllPage({history}) {
     },[])
   return (
     <>
-      <ShowAllAppBarComponent header={request} history={history} />
       {productList == null ? <CircularProgressComponent/> : 
       <Fragment>
+      <FilterDrawerComponent history={history}/>  
       <ShowAllGridComponent productList={productList} />
       <BottomNavigationBarComponent history={history}/>
       </Fragment>      

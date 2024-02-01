@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -9,12 +9,14 @@ import { ArrowLeft, ArrowLeftSharp, Filter, FilterAlt, West } from '@mui/icons-m
 import { ThemeProvider } from '@emotion/react';
 import theme from '../../theme';
 
-export default function ShowAllAppBarComponent({history}) {
+export default function ShowAllAppBarComponent({history,filterAction}) {
     const [header,setHeader]=React.useState("");
+    const [showFilter,setShowFilter]=useState(false);
     //setHeader from reading url params ?request=Flash
     useEffect(()=>{
         const urlParams = new URLSearchParams(window.location.search);
         setHeader(urlParams.get('request'));               
+        
     },[])
   return (
     <ThemeProvider theme={theme}>
@@ -32,17 +34,19 @@ export default function ShowAllAppBarComponent({history}) {
             <West/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {header}
+            {header!=null?header:"ချိန်ညှိချက်များ"}
           </Typography>
+          {header!==null &&
           <IconButton
             size="large"
             edge="end"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
+            onClick={filterAction}
           >
-            <FilterAlt />
-          </IconButton>
+            <FilterAlt/>
+          </IconButton>}
         </Toolbar>
       </AppBar>
     </Box>

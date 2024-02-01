@@ -5,6 +5,7 @@ import ShowAllPage from "./pages/showAll/ShowAllPage";
 import CartPage from "./pages/cart/CartPage";
 import BlogPage from "./pages/blog/BlogPage";
 import SettingPage from "./pages/setting/SettingPage";
+import TestDrawerComponent from "./test/drawer/TestDrawerComponent";
 const App=()=>{
   return(
     <Router>
@@ -14,6 +15,8 @@ const App=()=>{
       <Route path="/cart" exact component={CartPage} />
       <Route path="/blog" exact component={BlogPage} />
       <Route path="/setting" exact component={SettingPage} />
+      <Route exact path='/login' component={LoginPage} /> 
+      <Route exact path='/test/drawer' component={TestDrawerComponent} /> 
     </Switch>
     </Router>
   )
