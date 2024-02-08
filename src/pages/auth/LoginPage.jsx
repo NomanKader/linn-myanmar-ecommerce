@@ -22,24 +22,29 @@ export default function LoginPage({history}) {
   const [isLogin, setIsLogin] = useState(false);
   const [profileData, setProfileData] = useState();
   useEffect(() => {
+
+  }, []);
+  const handleGoogleLogin=()=>{
     window.gapi.load("auth2", () => {
       window.gapi.auth2.init({
         client_id:
           "332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com", // Replace with your Google API client ID
       });
     });
-  }, []);
+  }
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
   const responseGoogle = (response) => {    
     console.log(response.profileObj);
     setProfileData(response.profileObj);
-    setIsLogin(true);
+    if(response.Sc.id_token!=="" || response.Sc.id_token!==null ){
+      setIsLogin(true);
+    }    
     sessionStorage.setItem('Token',response?.Sc?.id_token);    
-    sessionStorage.setItem('ProfileIcon',response.profileObj.imageUrl)
-    sessionStorage.setItem('ProfileUsername',response.profileObj.name)
-    sessionStorage.setItem('ProfileUsername',response.profileObj.name)
+    sessionStorage.setItem('ProfileIcon',response?.profileObj?.imageUrl)
+    sessionStorage.setItem('ProfileUsername',response?.profileObj?.name)
+    sessionStorage.setItem('ProfileUsername',response?.profileObj?.name)
 
     // Handle the Google login response here
   };
@@ -149,7 +154,7 @@ export default function LoginPage({history}) {
                   <IconButton color="secondary">
                     <Facebook />
                   </IconButton>
-                  <IconButton color="success">
+                  <IconButton color="success" onClick={()=>handleGoogleLogin()}>
                     <GoogleLogin
                       buttonText=""
                       clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"                      
