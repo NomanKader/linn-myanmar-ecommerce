@@ -167,7 +167,7 @@ export default function LoginPage({history}) {
           ) : (
             <>
             <div style={{flex:1,display:'flex',flexDirection:'column',width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
-              <Avatar src={profileData.imageUrl} alt="linnmyanmar user profile"  />
+              <Avatar src={profileData?.imageUrl} alt="linnmyanmar user profile"  />
               <Typography variant="h4" sx={{mt:3}}>{profileData.name}</Typography>  
               <Typography variant="body1" sx={{mt:3}}>{profileData.email}</Typography>  
               <Button variant="contained" color="primary" sx={{width:200,mt:3}} onClick={()=>history.push('/setting')}>
