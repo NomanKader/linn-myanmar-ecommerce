@@ -107,7 +107,7 @@ export default function FilterDrawerComponent({history}) {
         <Typography variant='h6' sx={{fontWeight:'bold'}}>ဆေးလုံးအရေအတွက်</Typography>
         <FormControl>
         <RadioGroup sx={{mt:1}}>
-        {['အရေအတွက်အားလုံး', '0 - 50', '50 - 100', '100 - 300','300 - 500','500 - 1000','100+'].map((text, index) => (          
+        {['အရေအတွက်အားလုံး', '0 - 50', '50 - 100', '100 - 300','300 - 500','500 - 1000','1000+'].map((text, index) => (          
           <ListItem key={text} disablePadding>
             <FormControlLabel key={index} value={text} control={<Radio />} label={text} />            
           </ListItem>          

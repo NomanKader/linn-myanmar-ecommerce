@@ -32,25 +32,16 @@ export default function LoginPage({history}) {
   const handleTogglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
   };
-  const responseGoogle = (response) => {
+  const responseGoogle = (response) => {    
     console.log(response.profileObj);
     setProfileData(response.profileObj);
     setIsLogin(true);
-    // Handle the Google login response here
-  };
-  const handleGoogleLogin = async () => {
-    try {
-      const auth2 = window.gapi.auth2.getAuthInstance();
-      const googleUser = await auth2.signIn();
+    sessionStorage.setItem('Token',response.Sc.id_token);    
+    sessionStorage.setItem('ProfileIcon',response.profileObj.imageUrl)
+    sessionStorage.setItem('ProfileUsername',response.profileObj.name)
+    sessionStorage.setItem('ProfileUsername',response.profileObj.name)
 
-      // Handle user data here
-    } catch (error) {
-      if (error.error === "popup_closed_by_user") {
-        console.log("Google Sign-In popup closed by user");
-      } else {
-        console.error("Error during Google Sign-In:", error);
-      }
-    }
+    // Handle the Google login response here
   };
 
   return (
@@ -71,10 +62,10 @@ export default function LoginPage({history}) {
           elevation={3}
           style={{
             width: "80%",
-            height: "65%",
+            height: "80%",
             padding: "20px",
             display: "flex",
-            marginTop: 120,
+            marginTop: 40,
             flexDirection: "column",
             justifyContent: "center",
             borderRadius: 10,
@@ -101,7 +92,7 @@ export default function LoginPage({history}) {
                   alignItems: "center",
                 }}
               >
-                <Box sx={{ display: "flex", flex: 1, mb: 3 }}>
+                <Box sx={{ display: "flex", flex: 1, mb:3 }}>
                   <TextField
                     id="phoneNumber"
                     label="Enter Phone Number"
@@ -149,7 +140,7 @@ export default function LoginPage({history}) {
                 </Button>
 
                 {/* "Or" Text */}
-                <Typography variant="body2" sx={{ mt: 2, mb: 2 }}>
+                <Typography variant="body2" sx={{ mt: 2 }}>
                   Or
                 </Typography>
 
@@ -160,12 +151,11 @@ export default function LoginPage({history}) {
                   </IconButton>
                   <IconButton color="success">
                     <GoogleLogin
-                      clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"
                       buttonText=""
+                      clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"                      
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
-                      cookiePolicy={"single_host_origin"}
-                      style={{ backgroundColor: "#000" }}
+                      cookiePolicy={"single_host_origin"}                                              
                     />
                   </IconButton>
                   <IconButton color="dark">
@@ -177,11 +167,11 @@ export default function LoginPage({history}) {
           ) : (
             <>
             <div style={{flex:1,display:'flex',flexDirection:'column',width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
-              <Avatar src={profileData} alt="linnmyanmar user profile"  />
+              <Avatar src={profileData.imageUrl} alt="linnmyanmar user profile"  />
               <Typography variant="h4" sx={{mt:3}}>{profileData.name}</Typography>  
               <Typography variant="body1" sx={{mt:3}}>{profileData.email}</Typography>  
               <Button variant="contained" color="primary" sx={{width:200,mt:3}} onClick={()=>history.push('/setting')}>
-                Logout
+                Go Back
               </Button>
             </div>
             </>
