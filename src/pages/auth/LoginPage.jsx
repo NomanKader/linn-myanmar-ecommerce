@@ -22,7 +22,12 @@ export default function LoginPage({history}) {
   const [isLogin, setIsLogin] = useState(false);
   const [profileData, setProfileData] = useState();
   useEffect(() => {
-
+    window.gapi.load("auth2", () => {
+      window.gapi.auth2.init({
+        client_id:
+          "332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com", // Replace with your Google API client ID
+      });
+    });
   }, []);
   const handleGoogleLogin=()=>{
     window.gapi.load("auth2", () => {
