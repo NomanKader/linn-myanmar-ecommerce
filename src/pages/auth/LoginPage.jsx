@@ -36,7 +36,7 @@ export default function LoginPage({history}) {
     console.log(response.profileObj);
     setProfileData(response.profileObj);
     setIsLogin(true);
-    sessionStorage.setItem('Token',response.Sc.id_token);    
+    sessionStorage.setItem('Token',response?.Sc?.id_token);    
     sessionStorage.setItem('ProfileIcon',response.profileObj.imageUrl)
     sessionStorage.setItem('ProfileUsername',response.profileObj.name)
     sessionStorage.setItem('ProfileUsername',response.profileObj.name)
@@ -168,8 +168,8 @@ export default function LoginPage({history}) {
             <>
             <div style={{flex:1,display:'flex',flexDirection:'column',width:'100%',height:'100%',justifyContent:'center',alignItems:'center'}}>
               <Avatar src={profileData?.imageUrl} alt="linnmyanmar user profile"  />
-              <Typography variant="h4" sx={{mt:3}}>{profileData.name}</Typography>  
-              <Typography variant="body1" sx={{mt:3}}>{profileData.email}</Typography>  
+              <Typography variant="h4" sx={{mt:3}}>{profileData?.name}</Typography>  
+              <Typography variant="body1" sx={{mt:3}}>{profileData?.email}</Typography>  
               <Button variant="contained" color="primary" sx={{width:200,mt:3}} onClick={()=>history.push('/setting')}>
                 Go Back
               </Button>
