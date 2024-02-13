@@ -9,7 +9,7 @@ export default function ShowAllGridComponent({ productList }) {
     var isFilter=sessionStorage.getItem('isFilter');    
     console.log("IsFilter",isFilter);
     if(isFilter==true){
-      setIsFilter(true)
+      setIsFilter(true)      
     }
     else{
       setIsFilter(false);
@@ -50,11 +50,10 @@ export default function ShowAllGridComponent({ productList }) {
                 <Rating name="read-only" size="small" value={productList.avgStars} readOnly />
                 </div>
                 
-                {JSON.stringify(item?.productPricings[index]?.pricePerUnit)!==undefined?(
-                  <Typography variant="body1" sx={{fontWeight:'bold'}}>{JSON.stringify(item?.productPricings[index]?.pricePerUnit)+" Ks"}</Typography>                
-                ):(
-<Typography variant="body1" sx={{fontWeight:'bold',mt:1}}>0 Ks</Typography>                
-                )}
+                  <Typography variant="body1" sx={{fontWeight:'bold'}}>{item?.productPricings[0]?.customerType=='RETAIL_SALE'?item?.productPricings[0]?.pricePerUnit+' Ks':item?.productPricings[1]?.pricePerUnit+" Ks"}</Typography>                
+                
+
+                
                 
                 </div>
              </Paper>
