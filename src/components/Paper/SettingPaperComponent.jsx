@@ -111,9 +111,11 @@ export default function SettingPaprtComponent({ data, history }) {
                 ml: 1,
                 mr: 1,
                 mt: 3,
+                mb:1,
                 borderRadius: 5,
-                height: 50,
+                height: 100,
                 flex: 1,
+                alignItems:'center',
                 flexDirection: "row",
                 display: "flex",
               }}

@@ -16,7 +16,8 @@ import { Facebook, Google, Apple } from "@mui/icons-material";
 import logoIcon from "../../assets/linnmyanmar-logo.png";
 import theme from "../../theme";
 import ShowAllAppBarComponent from "../../components/AppBar/ShowAllAppBarComponent";
-
+import AppleLoginComponent from '../../components/Login/AppleLoginComponent';
+import FacebookLoginComponent from "../../components/Login/FacebookLoginComponent";
 export default function LoginPage({history}) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -157,11 +158,10 @@ export default function LoginPage({history}) {
                 {/* Social Media Icons */}
                 <Box sx={{ display: "flex", mb: { lg: 3 } }}>
                   <IconButton color="secondary">
-                    <Facebook />
+                    <FacebookLoginComponent/>
                   </IconButton>
                   <IconButton color="success" onClick={()=>handleGoogleLogin()}>
-                    <GoogleLogin
-                      buttonText=""
+                    <GoogleLogin                      
                       clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"                      
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
@@ -169,7 +169,7 @@ export default function LoginPage({history}) {
                     />
                   </IconButton>
                   <IconButton color="dark">
-                    <Apple />
+                    <AppleLoginComponent/>
                   </IconButton>
                 </Box>
               </div>

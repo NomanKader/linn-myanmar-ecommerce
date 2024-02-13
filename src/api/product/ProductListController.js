@@ -14,10 +14,11 @@ const ProductListAPI=async(setProductList)=>{
         data: '',
       })
         .then(response => {
-          response.data.data.map((product)=>{
-            console.log("Product at API",product)
-            setProductList(product)
-          })
+          setProductList(response.data.data);
+          // response.data.data.map((product)=>{
+          //   console.log("Product at API",product)
+          //   setProductList(product)
+          // })
           // Handle the response
           
         })
