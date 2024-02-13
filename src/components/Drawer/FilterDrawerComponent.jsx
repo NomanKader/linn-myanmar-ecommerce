@@ -24,7 +24,6 @@ export default function FilterDrawerComponent({ history, setProductList }) {
   const [state, setState] = React.useState({
     right: false,
   });
-  const [showFilter,setShowFilter]=React.useState(true);
   const [filterBody, setFilterBody] = React.useState();
 
   const toggleDrawer = (anchor, open) => (event) => {
@@ -226,10 +225,9 @@ export default function FilterDrawerComponent({ history, setProductList }) {
   );
   const handleFilter = async() => {    
     sessionStorage.setItem('isFilter','true')
-    setShowFilter(false)
-    // setState({
-    //   right:false
-    // })
+    setState({
+      right:false
+    })
     setProductList(null);    
     let category='DEFAULT';
     const currentUrl = window.location.href;
@@ -288,15 +286,13 @@ export default function FilterDrawerComponent({ history, setProductList }) {
           history={history}
           filterAction={toggleDrawer("right", true)}
         />
-        {showFilter==true ?
         <Drawer
           anchor="right"
           open={state["right"]}
           onClose={toggleDrawer("right", false)}
         >
           {list("right")}
-        </Drawer>:
-        <></>}
+        </Drawer>
       </React.Fragment>
     </div>
   );
