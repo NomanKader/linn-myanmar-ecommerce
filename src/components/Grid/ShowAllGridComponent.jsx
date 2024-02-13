@@ -51,10 +51,6 @@ export default function ShowAllGridComponent({ productList }) {
                 </div>
                 
                   <Typography variant="body1" sx={{fontWeight:'bold'}}>{item?.productPricings[0]?.customerType=='RETAIL_SALE'?item?.productPricings[0]?.pricePerUnit+' Ks':item?.productPricings[1]?.pricePerUnit+" Ks"}</Typography>                
-                
-
-                
-                
                 </div>
              </Paper>
         </Grid>
