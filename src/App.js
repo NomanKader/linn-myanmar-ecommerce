@@ -6,6 +6,7 @@ import CartPage from "./pages/cart/CartPage";
 import BlogPage from "./pages/blog/BlogPage";
 import SettingPage from "./pages/setting/SettingPage";
 import TestDrawerComponent from "./test/drawer/TestDrawerComponent";
+import ProductDetailPage from "./pages/detail/ProductDetailPage";
 const App=()=>{
   return(
     <Router>
@@ -15,6 +16,7 @@ const App=()=>{
       <Route path="/cart" exact component={CartPage} />
       <Route path="/blog" exact component={BlogPage} />
       <Route path="/setting" exact component={SettingPage} />
+      <Route path="/detail" exact component={ProductDetailPage} />
       <Route exact path='/login' component={LoginPage} /> 
       <Route exact path='/test/drawer' component={TestDrawerComponent} /> 
     </Switch>

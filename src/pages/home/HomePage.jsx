@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Typography, Grid, Card, CardMedia, CardContent } from "@mui/material";
+import React, { Fragment, useEffect, useState } from "react";
+import { Typography, Grid, Card, CardMedia, CardContent, CircularProgress } from "@mui/material";
 import { ArrowBack, ArrowForward, DoubleArrow } from "@mui/icons-material";
 import AppBarComponent from "../../components/AppBar/AppBarComponent";
 import CauroselComponent from "../../components/Caurosel/CauroselComponent";
@@ -8,15 +8,26 @@ import theme from "../../theme";
 import SubHeaderComponent from "../../components/Typography/SubHeaderComponent";
 import SeeMoreComponent from "../../components/Icon/SeeMoreComponent";
 import HomePageGridComponent from "../../components/Grid/HomePageGridComponent";
-import flashData from "../../data/FlashList";
+import CircularProgressComponent from '../../components/Progress/CircularProgressComponent';
 import ProductListAPI from "../../api/product/ProductListController";
 import BottomNavigationBarComponent from "../../components/NavigationBar/BottomNavigationBarComponent";
 export default function HomePage({history}) {
-  const [productList, setProductList] = useState(null);
+  const [productList, setProductList] = useState(null);  
+  const [flashList,setFlashList]=useState(null);
+  const [newList,setNewList]=useState(null);
+  const [bestSellerList,setBestSellerList]=useState(null);
+  const [availableList,setAvailableList]=useState(null);
+  const [blogList,setBlogList]=useState(null);
   useEffect(() => {
     //GetAnnouncementAPI();
+    sessionStorage.removeItem('isFilter');
     const gettingProductList = async () => {
-      await ProductListAPI(setProductList);
+      await ProductListAPI(setProductList,'BEST_SELLER');
+      await ProductListAPI(setFlashList,'FLASH_SALE');
+      await ProductListAPI(setNewList,'NEW_ARRIVAL');
+      await ProductListAPI(setBestSellerList,'BEST_SELLER');
+      await ProductListAPI(setAvailableList,'RECOMMENDED');
+      await ProductListAPI(setBlogList,'DEFAULT');
     };
     gettingProductList();
   }, []);
@@ -29,6 +40,8 @@ export default function HomePage({history}) {
       }}
     >
       <AppBarComponent />
+      {productList!==null ?
+      <div style={{cursor:'pointer'}}>
       <CauroselComponent />
       {/* Flash Sales Section */}
       <div>
@@ -46,7 +59,7 @@ export default function HomePage({history}) {
             <SeeMoreComponent iconText="အားလုံးပြရန်" request="Flash" history={history} />
           </div>
         </div>
-        <HomePageGridComponent productList={productList} />
+        <HomePageGridComponent productList={flashList} history={history} />
       </div>
       {/* အသစ်ရောက်သောပစ္စည်းများ */}
       <div>
@@ -66,7 +79,7 @@ export default function HomePage({history}) {
         </div>
         {/* Product Grid */}
         {productList !== null && (
-          <HomePageGridComponent productList={productList} />
+          <HomePageGridComponent productList={newList} history={history} />
         )}
       </div>
       {/* ရောင်းအားအကောင်းဆုံးပစ္စည်းများ */}
@@ -87,7 +100,7 @@ export default function HomePage({history}) {
         </div>
         {/* Product Grid */}
         {productList !== null && (
-          <HomePageGridComponent productList={productList} />
+          <HomePageGridComponent productList={bestSellerList} history={history} />
         )}
       </div>
       {/* ရနိုင်သောပစ္စည်းများ */}
@@ -108,7 +121,7 @@ export default function HomePage({history}) {
         </div>
         {/* Product Grid */}
         {productList !== null && (
-          <HomePageGridComponent productList={productList} />
+          <HomePageGridComponent productList={availableList} history={history}/>
         )}
       </div>
       {/* ထိပ်တန်းဆောင်းပါးများ */}
@@ -129,9 +142,12 @@ export default function HomePage({history}) {
         </div>
         {/* Product Grid */}
         {productList !== null && (
-          <HomePageGridComponent productList={productList} />
+          <HomePageGridComponent productList={blogList} history={history} />
         )}
       </div>
+      </div>:
+      <CircularProgressComponent/>
+    }
       {productList !== null &&
       <BottomNavigationBarComponent history={history}/>
       }

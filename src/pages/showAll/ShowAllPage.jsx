@@ -7,15 +7,35 @@ import CircularProgressComponent from "../../components/Progress/CircularProgres
 import ProductListAPI from "../../api/product/ProductListController";
 import FilterDrawerComponent from "../../components/Drawer/FilterDrawerComponent";
 export default function ShowAllPage({ history }) {
-  const [request, setRequest] = useState(null);
   const [productList, setProductList] = useState(null);
+  const [path,setPath]=useState('');
   useEffect(() => {
     //read the params
     const params = new URLSearchParams(window.location.search);
-    const request = params.get("request");
-    setRequest(request);
+    let request = params.get("request");
+    if(request=='FLASH'){
+      request='FLASH_SALE'
+      setPath(request);
+    }
+    else if(request=='အသစ်ရောက်သောပစ္စည်းများ'){
+      request='NEW_ARRIVAL'
+      setPath(request);
+    }
+    else if(request=='ရောင်းအားအကောင်းဆုံးပစ္စည်းများ'){
+      request='BEST_SELLER'
+      setPath(request);
+    }
+    else if(request=='ရနိုင်သောပစ္စည်းများ'){
+      request='RECOMMENDED'
+      setPath(request)
+    }
+    else{
+      request='DEFAULT'
+      setPath(request);
+    }
     const gettingProductList = async () => {
-      await ProductListAPI(setProductList);
+      console.log("Path",path);
+      await ProductListAPI(setProductList,request);
     };
     gettingProductList();
   }, []);
@@ -30,7 +50,7 @@ export default function ShowAllPage({ history }) {
           <CircularProgressComponent />
         ) : (
           <>
-            <ShowAllGridComponent productList={productList} />
+            <ShowAllGridComponent productList={productList} path={path} history={history} />
             <BottomNavigationBarComponent history={history} />
           </>
         )}

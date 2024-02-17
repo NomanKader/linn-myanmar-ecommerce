@@ -1,8 +1,8 @@
 import axios from "axios";
-const ProductListAPI=async(setProductList)=>{
+const ProductListAPI=async(setProductList,category)=>{
    await axios({
         method: 'post',
-        url: 'https://api.linnmyanmar.com.mm/dev/public/products/BEST_SELLER',
+        url: 'https://api.linnmyanmar.com.mm/dev/public/products/'+category,
         params: {
           page: 0,
           size: 10,
