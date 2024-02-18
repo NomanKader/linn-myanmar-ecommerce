@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { ArrowLeft, ArrowLeftSharp, Filter, FilterAlt, West } from '@mui/icons-material';
+import { ArrowLeft, ArrowLeftSharp, Filter, FilterAlt, Refresh, West } from '@mui/icons-material';
 import { ThemeProvider } from '@emotion/react';
 import theme from '../../theme';
 
@@ -33,20 +33,31 @@ export default function ShowAllAppBarComponent({history,filterAction}) {
           >
             <West/>
           </IconButton>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="subtitle" component="div" sx={{ flexGrow: 1 }}>
             {header!=null?header:"ချိန်ညှိချက်များ"}
           </Typography>
           {header!==null &&
+          <>
           <IconButton
             size="large"
             edge="end"
             color="inherit"
             aria-label="menu"
-            sx={{ mr: 2 }}
+            
             onClick={filterAction}
           >
             <FilterAlt/>
-          </IconButton>}
+          </IconButton>
+          <IconButton
+            size="large"
+            edge="end"
+            color="inherit"
+            aria-label="menu"
+            onClick={()=>window.location.reload()}
+          >
+            <Refresh/>
+          </IconButton>
+          </>}
         </Toolbar>
       </AppBar>
     </Box>

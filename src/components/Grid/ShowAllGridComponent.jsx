@@ -21,7 +21,7 @@ export default function ShowAllGridComponent({ productList,history }) {
     <Grid container spacing={2} style={{ marginTop: "3px"}} direction='row'>
       {productList?.map((item,index) => (
         <Grid item xs={6} lg={4} key={productList.id}>
-             <Paper elevation={3} onClick={()=>history.push('/detail?id='+item.id)} sx={{position:'relative',borderRadius:3,height:'400px',cursor:'pointer'}}>
+             <Paper elevation={3} onClick={()=>history.push('/detail?id='+item.id)} sx={{position:'relative',borderRadius:3,height:'400px',cursor:'pointer',m:1}}>
              <Typography
               variant="subtitle2"
               style={{                
@@ -51,7 +51,7 @@ export default function ShowAllGridComponent({ productList,history }) {
                 <Rating name="read-only" size="small" value={productList.avgStars} readOnly />
                 </div>
                 
-                <Typography variant="body1" sx={{fontWeight:'bold'}}>{item?.productPricings[0]?.customerType=='RETAIL_SALE'?parseInt(item?.productPricings[0]?.pricePerUnit).toLocaleString()+' Ks':parseInt(item?.productPricings[1]?.pricePerUnit).toLocaleString()+" Ks"}</Typography>                
+                <Typography variant="body1" sx={{fontWeight:'bold',mt:1}}>{item?.productPricings[0]?.customerType=='RETAIL_SALE'?parseInt(item?.productPricings[0]?.pricePerUnit).toLocaleString()+' Ks':parseInt(item?.productPricings[1]?.pricePerUnit).toLocaleString()+" Ks"}</Typography>                
                 </div>
              </Paper>
         </Grid>

@@ -6,8 +6,9 @@ import BottomNavigationBarComponent from "../../components/NavigationBar/BottomN
 import CircularProgressComponent from "../../components/Progress/CircularProgressComponent";
 import ProductListAPI from "../../api/product/ProductListController";
 import FilterDrawerComponent from "../../components/Drawer/FilterDrawerComponent";
+import NoItemFoundComponent from "../../components/Paper/NoItemFoundComponent";
 export default function ShowAllPage({ history }) {
-  const [productList, setProductList] = useState(null);
+  const [productList, setProductList] = useState([]);
   const [path,setPath]=useState('');
   useEffect(() => {
     //read the params
@@ -46,11 +47,15 @@ export default function ShowAllPage({ history }) {
           history={history}
           setProductList={setProductList}
         />
-        {productList == null ? (
-          <CircularProgressComponent />
-        ) : (
+        {productList.total<=0 ? (
+          <NoItemFoundComponent />
+        ) : 
+        productList.length<=0?(
+          <CircularProgressComponent/>
+        ):
+        (
           <>
-            <ShowAllGridComponent productList={productList} path={path} history={history} />
+            <ShowAllGridComponent productList={productList} path={path} history={history} />                      
             <BottomNavigationBarComponent history={history} />
           </>
         )}

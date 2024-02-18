@@ -29,7 +29,7 @@ export default function DetailAppBarComponent({history,cartAction}) {
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
-            onClick={()=>history.push('/')}
+            onClick={()=>window.history.back()}
           >
             <West/>
           </IconButton>
