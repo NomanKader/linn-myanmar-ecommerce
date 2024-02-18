@@ -42,11 +42,13 @@ export default function LoginPage({history}) {
     setShowPassword((prev) => !prev);
   };
   const responseGoogle = (response) => {    
-    console.log(response.profileObj);
+    console.log("Response",response);
+    console.log("Profile Obj",response.profileObj);
     setProfileData(response.profileObj);
-    if(response.Sc.id_token!=="" || response.Sc.id_token!==null ){
-      setIsLogin(true);
-    }    
+    setIsLogin(true);
+    // if(response.Sc.id_token!=="" || response.Sc.id_token!==null ){
+    //   setIsLogin(true);
+    // }    
     sessionStorage.setItem('Token',response?.Sc?.id_token);    
     sessionStorage.setItem('ProfileIcon',response?.profileObj?.imageUrl)
     sessionStorage.setItem('ProfileUsername',response?.profileObj?.name)
@@ -157,9 +159,9 @@ export default function LoginPage({history}) {
 
                 {/* Social Media Icons */}
                 <Box sx={{ display: "flex", mb: { lg: 3 } }}>
-                  <IconButton color="secondary">
+                  {/* <IconButton color="secondary">
                     <FacebookLoginComponent/>
-                  </IconButton>
+                  </IconButton> */}
                   <IconButton color="success" onClick={()=>handleGoogleLogin()}>
                     <GoogleLogin                      
                       clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"                      
@@ -168,9 +170,9 @@ export default function LoginPage({history}) {
                       cookiePolicy={"single_host_origin"}                                              
                     />
                   </IconButton>
-                  <IconButton color="dark">
+                  {/* <IconButton color="dark">
                     <AppleLoginComponent/>
-                  </IconButton>
+                  </IconButton> */}
                 </Box>
               </div>
             </>
