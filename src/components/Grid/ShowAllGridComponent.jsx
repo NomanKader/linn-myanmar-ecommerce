@@ -21,7 +21,7 @@ export default function ShowAllGridComponent({ productList,history }) {
     <Grid container spacing={2} style={{ marginTop: "3px"}} direction='row'>
       {productList?.map((item,index) => (
         <Grid item xs={6} lg={4} key={productList.id}>
-             <Paper elevation={3} onClick={()=>history.push('/detail?id='+item.id)} sx={{position:'relative',borderRadius:3,height:'400px',cursor:'pointer',m:1}}>
+             <Paper elevation={3} onClick={()=>window.location.replace('/detail?id='+item.id)} sx={{position:'relative',borderRadius:3,height:'400px',cursor:'pointer',m:1}}>
              <Typography
               variant="subtitle2"
               style={{                

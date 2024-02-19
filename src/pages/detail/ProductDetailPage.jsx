@@ -22,15 +22,18 @@ import {
   ShoppingBag,
   ShoppingCart,
 } from "@mui/icons-material";
+import RelatedProductListAPI from '../../api/product/RelatedProductListController';
 const ProductDetailPage = ({ history }) => {
   const [productDetail, setProductDetail] = useState();
   const [productImages, setProductImages] = useState([]);
   const [productList, setProductList] = useState([]);
+  const [relatedProductList,setRelatedProductList]=useState([]);
   useEffect(() => {
     const currentUrl = window.location.href;
     const urlSearchParams = new URLSearchParams(new URL(currentUrl).search);
     const id = urlSearchParams.get("id");
     ProductDetailAPI(id, setProductDetail, setProductImages, setProductList);
+    RelatedProductListAPI(id,setRelatedProductList);
   }, []);
   const cartAction = () => {
     history.push('/cart')
@@ -38,7 +41,7 @@ const ProductDetailPage = ({ history }) => {
   return (
     <ThemeProvider theme={theme}>
       <DetailAppBarComponent history={history} cartAction={cartAction} />
-      {productDetail != null ? (
+      {(productDetail != null && relatedProductList !=null) ? (
         <div>
           <Paper
             elevation={3}
@@ -153,13 +156,14 @@ const ProductDetailPage = ({ history }) => {
           <Typography variant="h6" sx={{ ml: 3, fontWeight: "bold" }}>
             ဆက်စပ်ပစ္စည်းများ
           </Typography>
+          {relatedProductList!=null &&
           <div style={{ marginLeft: 20, marginBottom: "10%" }}>
             <ShowAllGridComponent
-              productList={productList}
+              productList={relatedProductList}
               path={"/"}
               history={history}
             />
-          </div>
+          </div>}
           <Grid
             container
             spacing={2}
