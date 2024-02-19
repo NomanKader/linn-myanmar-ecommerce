@@ -7,6 +7,7 @@ import BlogPage from "./pages/blog/BlogPage";
 import SettingPage from "./pages/setting/SettingPage";
 import TestDrawerComponent from "./test/drawer/TestDrawerComponent";
 import ProductDetailPage from "./pages/detail/ProductDetailPage";
+import RegisterPage from "./pages/auth/RegisterPage";
 const App=()=>{
   return(
     <Router>
@@ -18,6 +19,7 @@ const App=()=>{
       <Route path="/setting" exact component={SettingPage} />
       <Route path="/detail" exact component={ProductDetailPage} />
       <Route exact path='/login' component={LoginPage} /> 
+      <Route exact path='/register' component={RegisterPage} /> 
       <Route exact path='/test/drawer' component={TestDrawerComponent} /> 
     </Switch>
     </Router>
