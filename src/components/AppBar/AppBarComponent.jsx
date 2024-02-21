@@ -50,7 +50,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function PrimarySearchAppBar() {  
+export default function AppBarComponent({history}) {  
   const mobileMenuId = 'primary-search-account-menu-mobile';
   return (
     <ThemeProvider theme={theme}>
@@ -65,7 +65,7 @@ export default function PrimarySearchAppBar() {
           >
             Linn Myanmar Shopping
           </Typography>
-          <Search>
+          <Search onClick={()=>history.push('/search')}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

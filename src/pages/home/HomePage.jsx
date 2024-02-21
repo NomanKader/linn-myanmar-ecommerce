@@ -39,7 +39,7 @@ export default function HomePage({history}) {
         height: "100%",
       }}
     >
-      <AppBarComponent />
+      <AppBarComponent history={history} />
       {productList!==null ?
       <div style={{cursor:'pointer'}}>
       <CauroselComponent />
