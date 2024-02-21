@@ -5,9 +5,10 @@ import theme from "../../theme";
 import ShowAllGridComponent from "../../components/Grid/ShowAllGridComponent";
 import CircularProgressComponent from "../../components/Progress/CircularProgressComponent";
 import NoItemFoundComponent from "../../components/Paper/NoItemFoundComponent";
-export default function ProductSearchPage({ history }) {
+export default function ProductSearchPage({ history }) {    
   const [productList, setProductList] = useState([]);
   const [showLoading, setShowLoading] = useState(false);
+  const [firstLoad,setFirstLoad]=useState(true);  
   const titleStyle = {
     fontWeight:'bold',
     marginTop:20,
@@ -18,6 +19,7 @@ export default function ProductSearchPage({ history }) {
       <SearchBarComponent
         setProductList={setProductList}
         setShowLoading={setShowLoading}
+        setFirstLoad={setFirstLoad}
       />
       {productList != null
         && productList.map(
@@ -71,7 +73,7 @@ export default function ProductSearchPage({ history }) {
           {showLoading==true &&
           <CircularProgressComponent/>
           }
-          {(showLoading==false && productList.length==0) &&
+          {(showLoading==false && productList.length==0 && firstLoad==false) &&
           <p>
            <NoItemFoundComponent/>
           </p>  

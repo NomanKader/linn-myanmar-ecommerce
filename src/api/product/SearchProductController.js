@@ -1,6 +1,7 @@
 import axios from "axios";
-const ProductSearchAPI=async(keyword,setProductList,setShowLoading)=>{
+const ProductSearchAPI=async(keyword,setProductList,setShowLoading,setFirstLoad)=>{
   setShowLoading(true);
+  setFirstLoad(false);
   setProductList([]);
     const apiUrl=process.env.REACT_APP_API_ENDPOINT+'public/search';
     await axios.get(apiUrl, {

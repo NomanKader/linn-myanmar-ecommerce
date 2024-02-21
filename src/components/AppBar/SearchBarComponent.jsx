@@ -53,7 +53,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-export default function SearchBarComponent({setProductList,setShowLoading}) {
+export default function SearchBarComponent({setProductList,setShowLoading,setFirstLoad}) {
   const [keyword,setKeyword]=useState('');  
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -61,7 +61,7 @@ export default function SearchBarComponent({setProductList,setShowLoading}) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
   const handleSearch=()=>{
-    ProductSearchAPI(keyword,setProductList,setShowLoading);
+    ProductSearchAPI(keyword,setProductList,setShowLoading,setFirstLoad);
   }
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
