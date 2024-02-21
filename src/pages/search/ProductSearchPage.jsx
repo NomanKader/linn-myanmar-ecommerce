@@ -78,10 +78,8 @@ export default function ProductSearchPage({ history }) {
           <p>
            <NoItemFoundComponent/>
           </p>  
-          }  
-                
+          }                  
       <BottomNavigationBarComponent history={history}/>
-
     </ThemeProvider>
   );
 }

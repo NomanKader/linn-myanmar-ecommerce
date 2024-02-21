@@ -41,7 +41,7 @@ export default function BottomNavigationBarComponent({history}) {
           }}
         >
           <BottomNavigationAction onClick={()=>history.push('/')} label="Home" icon={<RestoreIcon />} />
-          <BottomNavigationAction onClick={()=>history.push('/blog')} label="Blog" icon={<Article />} />
+          <BottomNavigationAction onClick={()=>history.push('/blog?request=Blog')} label="Blog" icon={<Article />} />
           <BottomNavigationAction onClick={()=>history.push('/cart')} label="Cart" icon={<ShoppingCart />} />
           <BottomNavigationAction onClick={()=>history.push('/setting')} label="Setting" icon={<Settings/>} />
         </BottomNavigation>

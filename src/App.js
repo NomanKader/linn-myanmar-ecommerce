@@ -9,6 +9,7 @@ import TestDrawerComponent from "./test/drawer/TestDrawerComponent";
 import ProductDetailPage from "./pages/detail/ProductDetailPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ProductSearchPage from './pages/search/ProductSearchPage';
+import BlogDetailPage from "./pages/detail/BlogDetailPage";
 const App=()=>{
   return(
     <Router>
@@ -17,6 +18,7 @@ const App=()=>{
       <Route path="/showAll" exact component={ShowAllPage} />
       <Route path="/cart" exact component={CartPage} />
       <Route path="/blog" exact component={BlogPage} />
+      <Route path="/blog/detail" exact component={BlogDetailPage} />
       <Route path="/setting" exact component={SettingPage} />
       <Route path="/detail" exact component={ProductDetailPage} />
       <Route path='/search' exact component={ProductSearchPage}/>

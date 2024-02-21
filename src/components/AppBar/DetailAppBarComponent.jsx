@@ -9,7 +9,7 @@ import { ArrowLeft, ArrowLeftSharp, Filter, FilterAlt, ShoppingBagOutlined, Shop
 import { ThemeProvider } from '@emotion/react';
 import theme from '../../theme';
 
-export default function DetailAppBarComponent({history,cartAction}) {
+export default function DetailAppBarComponent({history,cartAction,title}) {
     const [header,setHeader]=React.useState("");
     const [showFilter,setShowFilter]=useState(false);
     //setHeader from reading url params ?request=Flash
@@ -34,7 +34,7 @@ export default function DetailAppBarComponent({history,cartAction}) {
             <West/>
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            {"ကုန်ပစ္စည်းအသေးစိတ်"}
+            {title}
           </Typography>
           {header!==null &&
           <IconButton

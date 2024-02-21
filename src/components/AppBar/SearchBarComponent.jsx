@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -11,6 +11,7 @@ import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { ArrowBack, Send } from '@mui/icons-material';
 import ProductSearchAPI from '../../api/product/SearchProductController';
+import { Typography } from '@mui/material';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -59,7 +60,17 @@ export default function SearchBarComponent({setProductList,setShowLoading,setFir
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [title,setTitle]=useState('');
+  useEffect(()=>{
+    const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
 
+// Get a specific parameter
+const param1Value = urlParams.get('request');
+setTitle(param1Value);
+param1Value=='Product' &&
+ProductSearchAPI('',setProductList,setShowLoading,setFirstLoad);
+  },[])
   const handleSearch=()=>{
     ProductSearchAPI(keyword,setProductList,setShowLoading,setFirstLoad);
   }
@@ -139,18 +150,19 @@ export default function SearchBarComponent({setProductList,setShowLoading,setFir
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ mr: 1 }}
             onClick={()=>window.history.back()}
           >
             <ArrowBack />
           </IconButton>
-          <Search
+          <Typography variant='h6' sx={{mr:1}}>{title}</Typography>
+          <Search          
           onChange={(e,v)=>setKeyword(e.target.value)}          
           >
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
+            <StyledInputBase            
              sx={{width:{lg:1200,xs:300}}}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}              
@@ -159,13 +171,7 @@ export default function SearchBarComponent({setProductList,setShowLoading,setFir
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size="large" aria-label="show 4 new mails" color="inherit" onClick={()=>handleSearch()}>
-              <Badge  color="error">
-                <Send />
-              </Badge>
-            </IconButton>
-          </Box>
+          {window.location.pathname!='/blog' &&
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -177,7 +183,7 @@ export default function SearchBarComponent({setProductList,setShowLoading,setFir
             >
               <Send />
             </IconButton>
-          </Box>
+          </Box>}
         </Toolbar>
       </AppBar>
       {renderMobileMenu}

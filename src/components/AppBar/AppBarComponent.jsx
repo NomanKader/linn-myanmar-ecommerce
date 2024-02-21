@@ -65,7 +65,7 @@ export default function AppBarComponent({history}) {
           >
             Linn Myanmar Shopping
           </Typography>
-          <Search onClick={()=>history.push('/search')}>
+          <Search onClick={()=>history.push('/search?request=Product')}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>

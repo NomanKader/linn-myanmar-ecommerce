@@ -40,7 +40,7 @@ const ProductDetailPage = ({ history }) => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <DetailAppBarComponent history={history} cartAction={cartAction} />
+      <DetailAppBarComponent history={history} cartAction={cartAction} title={"ကုန်ပစ္စည်းအသေးစိတ်"} />
       {(productDetail != null && relatedProductList !=null) ? (
         <div>
           <Paper
