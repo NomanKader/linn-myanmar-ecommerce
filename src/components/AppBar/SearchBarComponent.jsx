@@ -155,6 +155,7 @@ export default function SearchBarComponent({setProductList,setShowLoading,setFir
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}              
               onKeyDown={(e,v)=>e.keyCode==13&&handleSearch()}
+              autoFocus={true}
             />
           </Search>
           <Box sx={{ flexGrow: 1 }} />

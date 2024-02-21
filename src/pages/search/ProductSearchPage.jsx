@@ -5,6 +5,7 @@ import theme from "../../theme";
 import ShowAllGridComponent from "../../components/Grid/ShowAllGridComponent";
 import CircularProgressComponent from "../../components/Progress/CircularProgressComponent";
 import NoItemFoundComponent from "../../components/Paper/NoItemFoundComponent";
+import BottomNavigationBarComponent from "../../components/NavigationBar/BottomNavigationBarComponent";
 export default function ProductSearchPage({ history }) {    
   const [productList, setProductList] = useState([]);
   const [showLoading, setShowLoading] = useState(false);
@@ -78,6 +79,9 @@ export default function ProductSearchPage({ history }) {
            <NoItemFoundComponent/>
           </p>  
           }  
+                
+      <BottomNavigationBarComponent history={history}/>
+
     </ThemeProvider>
   );
 }
