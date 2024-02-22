@@ -70,6 +70,7 @@ export default function AppBarComponent({history}) {
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase
+            sx={{width:{lg:1200,xs:300}}}
               placeholder="ရှာဖွေ"
               inputProps={{ 'aria-label': 'search' }}
             />

@@ -163,7 +163,7 @@ ProductSearchAPI('',setProductList,setShowLoading,setFirstLoad);
               <SearchIcon />
             </SearchIconWrapper>
             <StyledInputBase            
-             sx={{width:{lg:1200,xs:300}}}
+             sx={{width:{lg:1200,xs:120}}}
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}              
               onKeyDown={(e,v)=>e.keyCode==13&&handleSearch()}
