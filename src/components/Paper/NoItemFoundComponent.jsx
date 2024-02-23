@@ -3,20 +3,21 @@ import { Typography, Paper } from '@mui/material';
 
 const containerStyle = {
   display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  height: '100vh',
+  marginTop:30,
+  flex:1,
+  justifyContent:'center'
 };
 
 const paperStyle = {
-  padding: 3,
+  padding: 10,
   textAlign: 'center',
   color: 'text.secondary',
 };
 
 const emojiStyle = {
-  fontSize: '2rem',
+  fontSize: 20,
   marginBottom: 1,
+  fontWeight:'bold'
 };
 
 const NoItemFoundComponent = () => {
@@ -24,10 +25,7 @@ const NoItemFoundComponent = () => {
     <div style={containerStyle}>
       <Paper elevation={3} style={paperStyle}>
         <Typography variant="h5" gutterBottom>
-          <span style={emojiStyle}>😢</span> No items found with the applied filter
-        </Typography>
-        <Typography variant="body1">
-          Try adjusting your filter criteria or explore other options.
+          <span style={emojiStyle}>အချက်အလက်များမရှိပါ။</span>
         </Typography>
       </Paper>
     </div>

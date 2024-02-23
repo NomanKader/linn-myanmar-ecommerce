@@ -68,10 +68,15 @@ const urlParams = new URLSearchParams(queryString);
 // Get a specific parameter
 const param1Value = urlParams.get('request');
 setTitle(param1Value);
-param1Value=='Product' &&
-ProductSearchAPI('',setProductList,setShowLoading,setFirstLoad);
+// param1Value=='Product' &&
+// ProductSearchAPI('',setProductList,setShowLoading,setFirstLoad);
   },[])
   const handleSearch=()=>{
+    console.log("Keyword",keyword);
+    const existingSearchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
+    existingSearchHistory.push(keyword);
+    const updatedSearchHistoryString = JSON.stringify(existingSearchHistory);
+    localStorage.setItem('searchHistory', updatedSearchHistoryString);    
     ProductSearchAPI(keyword,setProductList,setShowLoading,setFirstLoad);
   }
   const handleProfileMenuOpen = (event) => {
