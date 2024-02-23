@@ -9,9 +9,10 @@ import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import { ArrowBack, Send } from '@mui/icons-material';
+import { ArrowBack, Send, WindowOutlined } from '@mui/icons-material';
 import ProductSearchAPI from '../../api/product/SearchProductController';
 import { Typography } from '@mui/material';
+import SearchBlogAPI from '../../api/blog/SearchBlogController';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -76,8 +77,18 @@ setTitle(param1Value);
     const existingSearchHistory = JSON.parse(localStorage.getItem('searchHistory')) || [];
     existingSearchHistory.push(keyword);
     const updatedSearchHistoryString = JSON.stringify(existingSearchHistory);
-    localStorage.setItem('searchHistory', updatedSearchHistoryString);    
-    ProductSearchAPI(keyword,setProductList,setShowLoading,setFirstLoad);
+    if(window.location.pathname=='/search'){
+      localStorage.setItem('searchHistory', updatedSearchHistoryString);    
+    }
+    
+    const request=window.location.pathname;
+    if(request=='/search'){
+      ProductSearchAPI(keyword,setProductList,setShowLoading,setFirstLoad);
+    }
+    else{
+      SearchBlogAPI(keyword,setProductList,setShowLoading);
+    }
+    
   }
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

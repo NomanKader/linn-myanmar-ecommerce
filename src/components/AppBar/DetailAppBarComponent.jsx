@@ -36,7 +36,7 @@ export default function DetailAppBarComponent({history,cartAction,title}) {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {title}
           </Typography>
-          {header!==null &&
+          {(header!==null && window.location.pathname!='/blog/detail') && 
           <IconButton
             size="large"
             edge="end"

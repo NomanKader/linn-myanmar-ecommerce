@@ -14,6 +14,7 @@ export default function ProductSearchPage({ history }) {
   const [firstLoad,setFirstLoad]=useState(true);  
   const [popularList,setPopularList]=useState([]);
   const [historyList,setHistoryList]=useState([]);
+  
   useEffect(()=>{
     GetPopularProductAPI(setPopularList);
     setHistoryList(localStorage.getItem('searchHistory'));
@@ -64,7 +65,9 @@ export default function ProductSearchPage({ history }) {
         sx={{ overflowX: 'auto', whiteSpace: 'nowrap',ml:2 }}
       > 
       {localStorage.getItem('searchHistory')!=null &&
-        JSON.parse(localStorage.getItem('searchHistory') || []).map((item,index)=>(
+        JSON.parse(localStorage.getItem('searchHistory') || [])
+        .filter((item) => item.trim() !== '')
+        .map((item,index)=>(
           <Chip            
           key={index}
           color="primary"
