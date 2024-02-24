@@ -38,6 +38,7 @@ export default function SettingPaprtComponent({ data, history }) {
   const handleRedirect = (iconName) => {
     if(iconName=='Login'){
       sessionStorage.clear();
+      localStorage.clear();
       history.push('/login')
     }
     else{
@@ -118,6 +119,7 @@ export default function SettingPaprtComponent({ data, history }) {
                 alignItems:'center',
                 flexDirection: "row",
                 display: "flex",
+                cursor:'pointer'
               }}
               elevation={3}
               onClick={() => handleRedirect(item.icon)}
@@ -131,7 +133,7 @@ export default function SettingPaprtComponent({ data, history }) {
                   display: "flex",
                 }}
               >
-                {item.icon == "Login" ? (
+                {(item.icon == "Login") ? (
                   <Login color="primary" sx={{ mr: 3, ml: 3, mt: 1.5 }} />
                 ) : item.icon == "History" ? (
                   <History color="primary" sx={{ mr: 3, ml: 3, mt: 1.5 }} />
@@ -165,14 +167,50 @@ export default function SettingPaprtComponent({ data, history }) {
                 ) : (
                   <></>
                 )}
-
                 <Typography variant="h6" sx={{ mt: 1 }}>
                   {item.title}
-                </Typography>
+                </Typography>            
               </div>
             </Paper>
           </Grid>
         ))}
+        {/* Logout */}
+        {showProfile==true &&
+        <Grid item xs={12} lg={6}>
+            <Paper
+              sx={{
+                ml: 1,
+                mr: 1,
+                mt: 3,
+                mb:1,
+                borderRadius: 5,
+                height: 100,
+                flex: 1,
+                alignItems:'center',
+                flexDirection: "row",
+                display: "flex", 
+                cursor:'pointer'               
+              }}
+              elevation={3}
+              onClick={() => handleRedirect('Login')}
+            >
+              {/* show icon of login from material */}
+              <div
+                style={{
+                  marginRight: 30,
+                  flex: 1,
+                  flexDirection: "row",
+                  display: "flex",
+                }}
+              >
+               
+               <Login color="primary" sx={{ mr: 3, ml: 3, mt: 1.5 }} />
+                <Typography variant="h6" sx={{ mt: 1 }}>
+                အကောင့်မှထွက်ရန်
+                </Typography>            
+              </div>
+            </Paper>
+          </Grid>}
       </Grid>
     </ThemeProvider>
   );

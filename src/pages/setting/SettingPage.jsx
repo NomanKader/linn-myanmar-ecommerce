@@ -47,10 +47,10 @@ export default function SettingPage({history}) {
       title:"App Version(1.7.6",
       icon:"Version"
     },
-    {
-      title:"အကောင့်မှထွက်ရန်",
-      icon:"Login"
-    }
+    // {
+    //   title:"အကောင့်မှထွက်ရန်",
+    //   icon:"Login"
+    // }
 
   ]
   return (
