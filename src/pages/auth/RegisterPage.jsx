@@ -38,7 +38,7 @@ export default function RegisterPage({history}) {
   const [emailError,setEmailError]=useState(false);
   const [phoneError,setPhoneError]=useState(false);
   const [passwordError,setPasswordError]=useState(false);
-  const [nameError,setNameError]=useState(true);
+  const [nameError,setNameError]=useState(false);
   useEffect(()=>{
     setDeviceID(_GetDeviceID());
     setDeviceOS(_GetDeviceOS());
