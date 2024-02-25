@@ -28,6 +28,7 @@ const ProductDetailPage = ({ history }) => {
   const [productImages, setProductImages] = useState([]);
   const [productList, setProductList] = useState([]);
   const [relatedProductList,setRelatedProductList]=useState([]);
+  const [productQuantity,setProductQuantity]=useState(0);
   useEffect(() => {
     const currentUrl = window.location.href;
     const urlSearchParams = new URLSearchParams(new URL(currentUrl).search);
@@ -38,6 +39,19 @@ const ProductDetailPage = ({ history }) => {
   const cartAction = () => {
     history.push('/cart')
   };
+  const handleProductQuantity=(status)=>{
+    if(status=='plus'){
+      setProductQuantity(productQuantity+1);
+    }
+    else{
+      if(productQuantity!=0){
+        setProductQuantity(productQuantity-1);
+      }
+      else{
+        setProductQuantity(0);
+      }
+    }
+  }
   return (
     <ThemeProvider theme={theme}>
       <DetailAppBarComponent history={history} cartAction={cartAction} title={"ကုန်ပစ္စည်းအသေးစိတ်"} />
@@ -91,10 +105,10 @@ const ProductDetailPage = ({ history }) => {
                   "RETAIL_SALE"
                     ? parseInt(
                         productDetail?.productPricings[0]?.pricePerUnit
-                      ).toLocaleString() + " Ks"
+                      || 0).toLocaleString() + " Ks"
                     : parseInt(
                         productDetail?.productPricings[1]?.pricePerUnit
-                      ).toLocaleString() + " Ks"}
+                      || 0).toLocaleString() + " Ks"}
                 </Typography>
                 <Typography variant="subtitle" sx={{ ml: 3, mt: 3 }}>
                   <span
@@ -135,14 +149,16 @@ const ProductDetailPage = ({ history }) => {
                     aria-label="delete"
                     size="large"
                     style={{ fontSize: 30 }}
+                    onClick={()=>handleProductQuantity('plus')}
                   >
                     <AddCircle fontSize="inherit" />
                   </IconButton>
-                  <Typography variant="h6">1</Typography>
+                  <Typography variant="h6">{productQuantity}</Typography>
                   <IconButton
                     aria-label="delete"
                     size="large"
                     style={{ fontSize: 30 }}
+                    onClick={()=>handleProductQuantity('minus')}
                   >
                     <RemoveCircle fontSize="inherit" />
                   </IconButton>

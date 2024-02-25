@@ -147,10 +147,8 @@ export default function HomePage({history}) {
       </div>
       </div>:
       <CircularProgressComponent/>
-    }
-      {productList !== null &&
-      <BottomNavigationBarComponent history={history}/>
-      }
+    }      
+      <BottomNavigationBarComponent history={history}/>      
     </div>
   );
 }

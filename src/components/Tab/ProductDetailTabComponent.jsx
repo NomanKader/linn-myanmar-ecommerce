@@ -44,10 +44,14 @@ export default function ProductDetailTabComponent({ productDetail }) {
   const [value, setValue] = React.useState(0);
   const productDescription = productDetail.description;
   const supplementFacts = productDetail.supplementFacts;
+  const [rating,setRating]=React.useState(0);
+  const [feedback,setFeedBack]=React.useState('');
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  const handleFeedback=()=>{
+    
+  }
   return (
     <Box sx={{ width: "100%" }}>
       <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -70,21 +74,25 @@ export default function ProductDetailTabComponent({ productDetail }) {
       <CustomTabPanel value={value} index={2}>
         <div style={{ display: "flex", flexDirection: "column" }}>
           <Rating
-            name="simple-controlled"
-            value={value}
+            name='simple-controlled'
+            value={rating}
             size='large'
-            onChange={(event, newValue) => {}}
-          />
+            onChange={(event, newValue) => [
+              setRating(newValue!=null?newValue:0),             
+            ]}
+          />          
           <TextField
             sx={{ width: 300, mt: 3 }}
             id="outlined-basic"
             label="သုံးသပ်ချက်"
             variant="outlined"
+            onChange={(e,v)=>setFeedBack(e.target.value)}
           />
           <Button
             sx={{ width: 300, mt: 3 }}
             variant="contained"
             startIcon={<Check />}
+            onClick={()=>handleFeedback()}
           >
             သုံးသပ်ချက်ရေးရန်
           </Button>
