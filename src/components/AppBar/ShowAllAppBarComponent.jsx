@@ -36,7 +36,7 @@ export default function ShowAllAppBarComponent({history,filterAction}) {
           <Typography variant="subtitle" component="div" sx={{ flexGrow: 1 }}>
             {header!=null?header:"ချိန်ညှိချက်များ"}
           </Typography>
-          {header!==null &&
+          {(header!==null && header!='Account Register') &&
           <>
           <IconButton
             size="large"

@@ -12,12 +12,12 @@ import {
 } from "@mui/material";
 import { GoogleLogin } from "react-google-login";
 import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Facebook, Google, Apple } from "@mui/icons-material";
 import logoIcon from "../../assets/linnmyanmar-logo.png";
 import theme from "../../theme";
 import ShowAllAppBarComponent from "../../components/AppBar/ShowAllAppBarComponent";
-import AppleLoginComponent from '../../components/Login/AppleLoginComponent';
-import FacebookLoginComponent from "../../components/Login/FacebookLoginComponent";
+import GetTokenAPI from '../../api/token/GetTokenController';
+import _GetDeviceID from '../../service/GetDeviceID';
+import _GetDeviceOS from '../../service/GetDeviceOS';
 export default function LoginPage({history}) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -46,15 +46,19 @@ export default function LoginPage({history}) {
     console.log("Profile Obj",response.profileObj);
     setProfileData(response.profileObj);
     setIsLogin(true);
-    // if(response.Sc.id_token!=="" || response.Sc.id_token!==null ){
-    //   setIsLogin(true);
-    // }    
-    sessionStorage.setItem('Token',response?.Sc?.id_token);    
+    sessionStorage.setItem('Token',response?.Tc?.id_token);    
     sessionStorage.setItem('ProfileIcon',response?.profileObj?.imageUrl)
     sessionStorage.setItem('ProfileUsername',response?.profileObj?.name)
     sessionStorage.setItem('ProfileUsername',response?.profileObj?.name)
-
-    // Handle the Google login response here
+    //Get Token 
+    const deviceID=_GetDeviceID();
+    const deviceOS=_GetDeviceOS();
+    const postBody={
+      "deviceId":deviceID,
+      "deviceOS":deviceOS,
+      "accessToken":sessionStorage.getItem('Token')
+    }
+    GetTokenAPI(postBody); 
   };
 
   return (
