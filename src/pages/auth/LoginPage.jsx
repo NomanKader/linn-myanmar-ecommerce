@@ -9,15 +9,18 @@ import {
   ThemeProvider,
   IconButton,
   Typography,
+  Grid,
 } from "@mui/material";
 import { GoogleLogin } from "react-google-login";
 import { Phone, Visibility, VisibilityOff } from "@mui/icons-material";
 import logoIcon from "../../assets/linnmyanmar-logo.png";
 import theme from "../../theme";
 import ShowAllAppBarComponent from "../../components/AppBar/ShowAllAppBarComponent";
+import AppleLoginComponent from '../../components/Login/AppleLoginComponent';
 import GetTokenAPI from '../../api/token/GetTokenController';
 import _GetDeviceID from '../../service/GetDeviceID';
 import _GetDeviceOS from '../../service/GetDeviceOS';
+
 export default function LoginPage({history}) {
   const [showPassword, setShowPassword] = useState(false);
   const [isLogin, setIsLogin] = useState(false);
@@ -29,6 +32,18 @@ export default function LoginPage({history}) {
           "332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com", // Replace with your Google API client ID
       });
     });
+  }, []);
+  useEffect(() => {
+    // Load Apple Sign In script
+    const script = document.createElement('script');
+    script.src = 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Cleanup function
+    return () => {
+      document.body.removeChild(script);
+    };
   }, []);
   const handleGoogleLogin=()=>{
     window.gapi.load("auth2", () => {
@@ -162,10 +177,14 @@ export default function LoginPage({history}) {
                 </Typography>
 
                 {/* Social Media Icons */}
-                <Box sx={{ display: "flex", mb: { lg: 3 } }}>
+                
+                <center>
+                <Box sx={{ mb: { lg: 3 } }}>
                   {/* <IconButton color="secondary">
                     <FacebookLoginComponent/>
                   </IconButton> */}
+                  <Grid container spacing={2} >
+                  <Grid item xs={12} lg={6} >
                   <IconButton color="success" onClick={()=>handleGoogleLogin()}>
                     <GoogleLogin                      
                       clientId="332664396318-09ie334fp6knohcelab5duiufnela5g8.apps.googleusercontent.com"                      
@@ -173,11 +192,23 @@ export default function LoginPage({history}) {
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}                                              
                     />
-                  </IconButton>                 
+                  </IconButton> 
+                  </Grid>
+                  <Grid item xs={12} lg={6}>
+                  <IconButton color="success" onClick={()=>handleGoogleLogin()}>
+                  <AppleLoginComponent/>
+                  {/* <div id="appleid-signin" class="signin-button" data-color="black" data-border="true" data-type="sign-in"></div>
+                  <script type="text/javascript" src="https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js"></script> */}
+                  {/* <AppleLoginComponent/> */}
+                  {/* <AppleLoginComponent/> */}
+                  </IconButton>         
+                  </Grid>  
+                  </Grid>      
                   {/* <IconButton color="dark">
                     <AppleLoginComponent/>
                   </IconButton> */}
-                </Box>
+                </Box>    
+                </center>            
                 <div style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
                 <Typography sx={{alignSelf:'flex-start',mb:3,mt:1,cursor:'pointer'}}>Don't have an account yet?Please <span onClick={()=>history.push('/register?request=Account Register')} style={{fontWeight:'bold',color:theme.palette.primary.main,textDecorationLine:'underline'}}>SignUp</span></Typography>
                 </div>
