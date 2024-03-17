@@ -4,7 +4,13 @@ import AppleLogin from 'react-apple-login';
 const AppleLoginComponent = () => {
   const [authorizationCode, setAuthorizationCode] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+      setAuthorizationCode(code);
+    }
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (authorizationCode) {
