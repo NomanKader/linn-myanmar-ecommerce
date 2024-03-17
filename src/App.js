@@ -10,6 +10,7 @@ import ProductDetailPage from "./pages/detail/ProductDetailPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ProductSearchPage from './pages/search/ProductSearchPage';
 import BlogDetailPage from "./pages/detail/BlogDetailPage";
+import AppleLoginTestPage from "./test/AppleLoginTest";
 const App=()=>{
   return(
     <Router>
@@ -25,6 +26,7 @@ const App=()=>{
       <Route exact path='/login' component={LoginPage} /> 
       <Route exact path='/register' component={RegisterPage} /> 
       <Route exact path='/test/drawer' component={TestDrawerComponent} /> 
+      <Route exact path='/test/applelogin' component={AppleLoginTestPage} /> 
     </Switch>
     </Router>
   )
