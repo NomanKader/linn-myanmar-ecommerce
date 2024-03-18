@@ -4,28 +4,28 @@ import AppleLogin from 'react-apple-login';
 const AppleLoginComponent = () => {
   const [authorizationCode, setAuthorizationCode] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    console.log(code);
-    if (code) {
-      setAuthorizationCode(code);
-      const fetchData = async () => {
-        if (code) {
-          try {
-            const userInfo = await fetchUserInfo(code);
-            setUserDetails(userInfo);
-            sendToApi(userInfo);
-          } catch (error) {
-            console.error('Error fetching user details:', error);
-          }
-        }
-      };
-      if(code!=null){
-        fetchData();
-      }
-    }
-  }, []);
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(window.location.search);
+  //   const code = urlParams.get('code');
+  //   console.log(code);
+  //   if (code) {
+  //     setAuthorizationCode(code);
+  //     const fetchData = async () => {
+  //       if (code) {
+  //         try {
+  //           const userInfo = await fetchUserInfo(code);
+  //           setUserDetails(userInfo);
+  //           sendToApi(userInfo);
+  //         } catch (error) {
+  //           console.error('Error fetching user details:', error);
+  //         }
+  //       }
+  //     };
+  //     if(code!=null){
+  //       fetchData();
+  //     }
+  //   }
+  // }, []);
   const fetchUserInfo = async (code) => {
     const userInfoEndpoint = 'https://appleid.apple.com/auth/user';
     const response = await fetch(userInfoEndpoint, {
@@ -70,8 +70,8 @@ const AppleLoginComponent = () => {
     <AppleLogin
       clientId="com.mm.chanlinnmyanmar"
       redirectURI="https://linn-myanmar-ecommerce.vercel.app/login"
-      callback={(response) => setAuthorizationCode(response.authorization.code)}
-      scope='name,email'
+      //callback={(response) => setAuthorizationCode(response.authorization.code)}
+      scope='name'
     />
   );
 };
