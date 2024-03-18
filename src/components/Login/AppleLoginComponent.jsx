@@ -7,26 +7,25 @@ const AppleLoginComponent = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    console.log(code);
     if (code) {
       setAuthorizationCode(code);
+      const fetchData = async () => {
+        if (code) {
+          try {
+            const userInfo = await fetchUserInfo(code);
+            setUserDetails(userInfo);
+            sendToApi(userInfo);
+          } catch (error) {
+            console.error('Error fetching user details:', error);
+          }
+        }
+      };
+      if(code!=null){
+        fetchData();
+      }
     }
   }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      if (authorizationCode) {
-        try {
-          const userInfo = await fetchUserInfo(authorizationCode);
-          setUserDetails(userInfo);
-          sendToApi(userInfo);
-        } catch (error) {
-          console.error('Error fetching user details:', error);
-        }
-      }
-    };
-
-    fetchData();
-  }, [authorizationCode]);
-
   const fetchUserInfo = async (code) => {
     const userInfoEndpoint = 'https://appleid.apple.com/auth/user';
     const response = await fetch(userInfoEndpoint, {
