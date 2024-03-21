@@ -67,12 +67,13 @@ const AppleLoginComponent = () => {
   };
 
   return (
-    <AppleLogin
-      clientId="com.mm.chanlinnmyanmar"
-      redirectURI="https://linn-myanmar-ecommerce.vercel.app/login"
-      //callback={(response) => setAuthorizationCode(response.authorization.code)}
-      scope='name'
-    />
+    // <AppleLogin
+    //   clientId="com.mm.chanlinnmyanmar"
+    //   redirectURI="https://linn-myanmar-ecommerce.vercel.app/login"
+    //   //callback={(response) => setAuthorizationCode(response.authorization.code)}
+    //   scope='name'
+    // />
+    <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
   );
 };
 

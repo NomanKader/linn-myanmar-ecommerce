@@ -1,82 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import * as fs from 'fs';
+import React from 'react';
+import jwt from 'jsonwebtoken';
+import { Button } from '@mui/material';
 
-const AppleLoginTestPage = () => {
-  const [userDetails, setUserDetails] = useState(null);
-  const [authorizationCode, setAuthorizationCode] = useState('');
 
-  useEffect(() => {
-    // Parse authorization code from URL query parameters
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    if (code) {
-      setAuthorizationCode(code);
-      fetchUserDetails(code);
-    }
-  }, []);
 
-  const fetchUserDetails = async (code) => {
+export default function AppleLoginTestPage() {
+
+
+  const generateClientSecret = () => {
     try {
-      const response = await fetchUserInfoFromApple(code);
-      setUserDetails(response);
+      //reaed private key from file 
+      // const privateKey = fs.readFileSync('./AuthKey_32C9B8T2BV.p8', 'utf8');
+      const privateKey='-----BEGIN PRIVATE KEY----- MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgegteDmkcoQGrDyy2 18gZG34aqSSp6emCcFt/BXdckWqgCgYIKoZIzj0DAQehRANCAAQQC6iR6Oj6LBrz LgxeeyDLdc8KePt+/okcyFPDBeYZNqIHhAm84oqPpN7uiCvLGi6ikLUPiAPYK5d/ beA5filA -----END PRIVATE KEY-----'
+      //const privateKey = `-----BEGIN PRIVATE KEY-----MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgegteDmkcoQGrDyy218gZG34aqSSp6emCcFt/BXdckWqgCgYIKoZIzj0DAQehRANCAAQQC6iR6Oj6LBrzLgxeeyDLdc8KePt+/okcyFPDBeYZNqIHhAm84oqPpN7uiCvLGi6ikLUPiAPYK5d/beA5filA-----END PRIVATE KEY-----`;
+      console.log('Private Key:', privateKey); // Log the private key
+      const payload = { data: 'client secret data' };
+      const token = jwt.sign(payload, privateKey, { algorithm: 'RS256' });
+      console.log('Token:', token); // Log the generated token
+      return token;
     } catch (error) {
-      console.error('Error fetching user details:', error);
-    }
-  };
-
-  const fetchUserInfoFromApple = async (code) => {
-    const userInfoEndpoint = 'https://appleid.apple.com/auth/user';
-    const response = await fetch(userInfoEndpoint, {
-      headers: {
-        Authorization: `Bearer ${code}`,
-      },
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to fetch user details from Apple');
-    }
-
-    return await response.json();
-  };
-
-  const sendToApi = async () => {
-    try {
-      const response = await fetch('https://api.linnmyanmar.com.mm/dev/auth/customers/apple', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          authorizationCode: authorizationCode,
-          fullName: userDetails ? userDetails.name : '',
-          email: userDetails ? userDetails.email : '',
-          user: userDetails ? userDetails.sub : '',
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to send data to API');
-      }
-
-      // Handle success
-    } catch (error) {
-      console.error('Error sending data to API:', error);
+      console.error('Error generating client secret:', error);
+      return null;
     }
   };
 
   return (
-    <div>
-      {userDetails ? (
-        <div>
-          <p>Full Name: {userDetails.name}</p>
-          <p>Email: {userDetails.email}</p>
-          <p>User ID: {userDetails.sub}</p>
-          <button onClick={sendToApi}>Send to API</button>
-        </div>
-      ) : (
-        <p>Loading user details...</p>
-      )}
-    </div>
+    <Button onClick={() => generateClientSecret()} variant="contained">
+      AppleLoginTestPage
+    </Button>
   );
-};
-
-export default AppleLoginTestPage;
+}
