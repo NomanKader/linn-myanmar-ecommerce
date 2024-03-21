@@ -4,7 +4,26 @@ import AppleLogin from 'react-apple-login';
 const AppleLoginComponent = () => {
   const [authorizationCode, setAuthorizationCode] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-  // useEffect(() => {
+  useEffect(() => {
+    const initializeAppleSignIn = () => {
+        window.AppleID.auth.init({
+            clientId: '[CLIENT_ID]',
+            scope: '[SCOPES]',
+            redirectURI: '[REDIRECT_URI]',
+            state: '[STATE]',
+            nonce: '[NONCE]',
+            usePopup: true
+        });
+    };
+
+    // Initialize Apple Sign In when component mounts
+    initializeAppleSignIn();
+
+    // Cleanup function to remove event listeners or perform other cleanup
+    return () => {
+        // You can add cleanup code here if needed
+    };
+}, []); 
   //   const urlParams = new URLSearchParams(window.location.search);
   //   const code = urlParams.get('code');
   //   console.log(code);
@@ -40,6 +59,7 @@ const AppleLoginComponent = () => {
 
     return await response.json();
   };
+
 
   const sendToApi = async (userInfo) => {
     try {
