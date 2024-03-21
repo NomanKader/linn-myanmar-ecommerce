@@ -4,34 +4,7 @@ import AppleLogin from 'react-apple-login';
 const AppleLoginComponent = () => {
   const [authorizationCode, setAuthorizationCode] = useState('');
   const [userDetails, setUserDetails] = useState(null);
-//   useEffect(() => {
-//     const loadAppleSignInScript = () => {
-//         const script = document.createElement('script');
-//         script.src = 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';
-//         script.async = true;
-//         script.onload = initializeAppleSignIn;
-//         document.body.appendChild(script);
-//     };
-
-//     const initializeAppleSignIn = () => {
-//         window.AppleID.auth.init({
-//             clientId: 'com.mm.chanlinnmyanmar',
-//             scope: 'name email',
-//             redirectURI: 'https://linn-myanmar-ecommerce.vercel.app/login',
-//             // state: '[STATE]',
-//             // nonce: '[NONCE]',
-//             usePopup: true
-//         });
-//     };
-
-//     // Load Apple Sign In script when component mounts
-//     loadAppleSignInScript();
-
-//     // Cleanup function to remove event listeners or perform other cleanup
-//     return () => {
-//         // You can add cleanup code here if needed
-//     };
-// }, []);
+  // useEffect(() => {
   //   const urlParams = new URLSearchParams(window.location.search);
   //   const code = urlParams.get('code');
   //   console.log(code);
@@ -68,7 +41,6 @@ const AppleLoginComponent = () => {
     return await response.json();
   };
 
-
   const sendToApi = async (userInfo) => {
     try {
       const response = await fetch('https://api.linnmyanmar.com.mm/dev/auth/customers/apple', {
@@ -98,17 +70,9 @@ const AppleLoginComponent = () => {
     <AppleLogin
       clientId="com.mm.chanlinnmyanmar"
       redirectURI="https://linn-myanmar-ecommerce.vercel.app/login"
-      state="state"
-      nonce="nonce"
-      usePopup={true}
-      onSuccess={(response) => console.log(response)}
-      onFailure={(error) => console.log(error)}      
-      onAutoLoadFailed={(error) => console.log(error)}
-      scope='name email'
       //callback={(response) => setAuthorizationCode(response.authorization.code)}
-      
+      scope='name'
     />
-    // <div id="appleid-signin" data-color="black" data-border="true" data-type="sign in"></div>
   );
 };
 
