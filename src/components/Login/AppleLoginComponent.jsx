@@ -7,12 +7,12 @@ const AppleLoginComponent = () => {
   useEffect(() => {
     const initializeAppleSignIn = () => {
         window.AppleID.auth.init({
-            clientId: '[CLIENT_ID]',
-            scope: '[SCOPES]',
-            redirectURI: '[REDIRECT_URI]',
-            state: '[STATE]',
-            nonce: '[NONCE]',
-            usePopup: true
+          clientId : 'com.mm.chanlinnmyanmar',
+          scope : 'name email',
+          redirectURI : 'https://linn-myanmar-ecommerce.vercel.app/login',
+          state : '[name email]',
+          nonce : '[NONCE]',
+          usePopup : true
         });
     };
 
