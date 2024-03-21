@@ -5,25 +5,33 @@ const AppleLoginComponent = () => {
   const [authorizationCode, setAuthorizationCode] = useState('');
   const [userDetails, setUserDetails] = useState(null);
   useEffect(() => {
+    const loadAppleSignInScript = () => {
+        const script = document.createElement('script');
+        script.src = 'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js';
+        script.async = true;
+        script.onload = initializeAppleSignIn;
+        document.body.appendChild(script);
+    };
+
     const initializeAppleSignIn = () => {
         window.AppleID.auth.init({
-          clientId : 'com.mm.chanlinnmyanmar',
-          scope : 'name email',
-          redirectURI : 'https://linn-myanmar-ecommerce.vercel.app/login',
-          state : '[name email]',
-          nonce : '[NONCE]',
-          usePopup : true
+            clientId: 'com.mm.chanlinnmyanmar',
+            scope: 'name email',
+            redirectURI: 'https://linn-myanmar-ecommerce.vercel.app/login',
+            // state: '[STATE]',
+            // nonce: '[NONCE]',
+            usePopup: true
         });
     };
 
-    // Initialize Apple Sign In when component mounts
-    initializeAppleSignIn();
+    // Load Apple Sign In script when component mounts
+    loadAppleSignInScript();
 
     // Cleanup function to remove event listeners or perform other cleanup
     return () => {
         // You can add cleanup code here if needed
     };
-}, []); 
+}, []);
   //   const urlParams = new URLSearchParams(window.location.search);
   //   const code = urlParams.get('code');
   //   console.log(code);
