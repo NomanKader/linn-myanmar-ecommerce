@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import AppleSignin from 'react-apple-signin-auth';
 import axios from 'axios'; // Import axios for making HTTP requests
+import {Typography} from '@mui/material'
 //import .p8 file which is under src folder
 const jwt = require('jsonwebtoken');
 
@@ -46,12 +47,14 @@ const generateClientSecret = async(idToken) => {
 
 const AppleLoginTest = ({ ...rest }) => {
   // Callback function to handle successful Apple Sign In
+  const [secret,setClientSecret]=useState();
   const handleSuccess = async (response) => {
     try {
       // Generate client_secret using the id_token
       const clientSecret = generateClientSecret(response.authorization.id_token);
-      copyToClipboard(clientSecret);
-      console.log("Client secret"+clientSecret);
+      setClientSecret(clientSecret);
+      // copyToClipboard(clientSecret);
+      // console.log("Client secret"+clientSecret);
       // Make the cURL request
       const curlResponse = await axios.post('https://appleid.apple.com/auth/token', {
         client_id: 'com.mm.chanlinnmyanmar',
@@ -87,6 +90,7 @@ const AppleLoginTest = ({ ...rest }) => {
     document.body.removeChild(textarea);
   };
   return (
+    <>
     <AppleSignin
       authOptions={{
         clientId: 'com.mm.chanlinnmyanmar',
@@ -104,6 +108,8 @@ const AppleLoginTest = ({ ...rest }) => {
       onFailure={(error) => console.log(error)}
       onError={(error) => console.error(error)}
     />
+    <Typography variant='body2'>{secret}</Typography>
+    </>
   );
 };
 
