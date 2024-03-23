@@ -9,8 +9,9 @@ const generateClientSecret = async(idToken) => {
   console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
   const privateKeyResponse = await axios.get('https://api.jsonstorage.net/v1/json/1e9acf2e-bc83-4a44-adb1-3650c7100599/de614472-ca2d-4886-ba43-3196c828bfda'); // Adjust the endpoint URL as per your server setup
+  console.log("Private key response"+ privateKeyResponse);  
   const privateKeyContent = privateKeyResponse.data;
-  console.log("Private key"+ privateKeyContent);  
+  console.log("Private key content"+ privateKeyContent);
   // Decode the id_token to extract necessary information
   const decodedToken = jwt.decode(idToken);
 
