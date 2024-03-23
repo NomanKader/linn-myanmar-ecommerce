@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 
 // Function to generate client_secret using id_token and private key
 const generateClientSecret = (idToken) => {
-  console.log("ID token",idToken);
+  console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
   const privateKey = fs.readFile(SecretFile,'utf8').toString();
 
