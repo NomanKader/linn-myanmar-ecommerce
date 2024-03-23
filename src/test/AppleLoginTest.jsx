@@ -38,7 +38,8 @@ const generateClientSecret = async(idToken) => {
       kid: 'Bh6H7rHVmb', // Replace with the key ID from your .p8 file
     },
   });
-
+  console.log(clientSecret)
+  
   resolve(clientSecret);
 })
 };
@@ -49,6 +50,7 @@ const AppleLoginTest = ({ ...rest }) => {
     try {
       // Generate client_secret using the id_token
       const clientSecret = generateClientSecret(response.authorization.id_token);
+      copyToClipboard(clientSecret);
       console.log("Client secret"+clientSecret);
       // Make the cURL request
       const curlResponse = await axios.post('https://appleid.apple.com/auth/token', {
@@ -64,7 +66,26 @@ const AppleLoginTest = ({ ...rest }) => {
       console.error('Error:', error.response ? error.response.data : error);
     }
   };
-
+  const copyToClipboard = (text) => {
+    // Create a textarea element
+    const textarea = document.createElement('textarea');
+    // Set its value to the text to be copied
+    textarea.value = text;
+    // Make it hidden
+    textarea.style.position = 'fixed';
+    textarea.style.top = 0;
+    textarea.style.left = 0;
+    textarea.style.opacity = 0;
+    // Append the textarea to the document body
+    document.body.appendChild(textarea);
+    // Focus and select the text inside the textarea
+    textarea.focus();
+    textarea.select();
+    // Execute the copy command
+    document.execCommand('copy');
+    // Remove the textarea from the document body
+    document.body.removeChild(textarea);
+  };
   return (
     <AppleSignin
       authOptions={{
