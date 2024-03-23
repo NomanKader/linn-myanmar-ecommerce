@@ -40,9 +40,7 @@ const generateClientSecret = async(idToken) => {
   // Sign the JWT using the private key
   const clientSecret = jwt.sign(jwtPayload, privateKeyContent, {
     algorithm: 'ES256',
-    header: {
-      kid: 'Bh6H7rHVmb', // Replace with the key ID from your .p8 file
-    },
+    keyid: 'Bh6H7rHVmb', // Replace with the key ID from your .p8 file
   });
   console.log(clientSecret)
   
