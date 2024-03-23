@@ -21,6 +21,8 @@ const AppleLoginTest = ({ ...rest }) => (
     /** Checkout README.md for further customization props. */
     /** Spread rest props if needed */
     {...rest}
+    /** Callbacks */
+    onSuccess={(response) => console.log(response)}
   />
 );
 
