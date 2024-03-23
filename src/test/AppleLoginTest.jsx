@@ -23,6 +23,8 @@ const AppleLoginTest = ({ ...rest }) => (
     {...rest}
     /** Callbacks */
     onSuccess={(response) => console.log(response)}
+    onFailure={(error) => console.log(error)}
+    onError={(error) => console.error(error)} // default = undefined
   />
 );
 
