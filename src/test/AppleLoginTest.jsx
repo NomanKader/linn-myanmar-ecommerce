@@ -52,20 +52,19 @@ const generateClientSecret = async(idToken) => {
 
 const AppleLoginTest = ({ ...rest }) => {
   // Callback function to handle successful Apple Sign In
-  const [secret,setClientSecret]=useState('');
+  const [clientSecret, setClientSecret] = useState(''); // State to hold the client secret
+
   const handleSuccess = async (response) => {
     try {
       // Generate client_secret using the id_token
-      const clientSecret = generateClientSecret(response.authorization.id_token);
-      setClientSecret(JSON.stringify(clientSecret));
-      // copyToClipboard(clientSecret);
-      // console.log("Client secret"+clientSecret);
+      const generatedClientSecret = await generateClientSecret(response.authorization.id_token);
+      setClientSecret(generatedClientSecret); // Set the client secret in state
       // Make the cURL request
       const curlResponse = await axios.post('https://appleid.apple.com/auth/token', {
         client_id: 'com.mm.chanlinnmyanmar',
         code: response.authorization.code,
         grant_type: 'authorization_code',
-        client_secret: clientSecret,
+        client_secret: generatedClientSecret, // Pass the generated client secret
         redirect_uri: 'https://linn-myanmar-ecommerce.vercel.app/login',
       });
 
@@ -74,48 +73,30 @@ const AppleLoginTest = ({ ...rest }) => {
       console.error('Error:', error.response ? error.response.data : error);
     }
   };
-  const copyToClipboard = (text) => {
-    // Create a textarea element
-    const textarea = document.createElement('textarea');
-    // Set its value to the text to be copied
-    textarea.value = text;
-    // Make it hidden
-    textarea.style.position = 'fixed';
-    textarea.style.top = 0;
-    textarea.style.left = 0;
-    textarea.style.opacity = 0;
-    // Append the textarea to the document body
-    document.body.appendChild(textarea);
-    // Focus and select the text inside the textarea
-    textarea.focus();
-    textarea.select();
-    // Execute the copy command
-    document.execCommand('copy');
-    // Remove the textarea from the document body
-    document.body.removeChild(textarea);
-  };
+
   return (
     <>
-    <AppleSignin
-      authOptions={{
-        clientId: 'com.mm.chanlinnmyanmar',
-        scope: 'email name',
-        redirectURI: 'https://linn-myanmar-ecommerce.vercel.app/login',
-        state: '',
-        nonce: 'nonce',
-        usePopup: true,
-      }}
-      uiType="dark"
-      className="apple-auth-btn"
-      buttonExtraChildren="Continue with Apple"
-      {...rest}
-      onSuccess={handleSuccess} // Pass the custom success handler
-      onFailure={(error) => console.log(error)}
-      onError={(error) => console.error(error)}
-    />
-    <Typography variant='body2'>Client Secret is : {secret}</Typography>
+      <AppleSignin
+        authOptions={{
+          clientId: 'com.mm.chanlinnmyanmar',
+          scope: 'email name',
+          redirectURI: 'https://linn-myanmar-ecommerce.vercel.app/login',
+          state: '',
+          nonce: 'nonce',
+          usePopup: true,
+        }}
+        uiType="dark"
+        className="apple-auth-btn"
+        buttonExtraChildren="Continue with Apple"
+        {...rest}
+        onSuccess={handleSuccess} // Pass the custom success handler
+        onFailure={(error) => console.log(error)}
+        onError={(error) => console.error(error)}
+      />
+      <Typography variant='body2'>Client Secret is : {clientSecret}</Typography>
     </>
   );
 };
+
 
 export default AppleLoginTest;
