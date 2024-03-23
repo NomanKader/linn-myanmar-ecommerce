@@ -7,11 +7,12 @@ const fs = require('fs').promises;
 const jwt = require('jsonwebtoken');
 
 // Function to generate client_secret using id_token and private key
-const generateClientSecret = (idToken) => {
+const generateClientSecret = async(idToken) => {
   console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
-  const privateKey = fs.readFile(SecretFile,'utf8').toString();
-
+  const privateKeyResponse = await axios.get('/api/private-key'); // Adjust the endpoint URL as per your server setup
+  const privateKeyContent = privateKeyResponse.data;
+  console.log("Private key"+ privateKeyContent);  
   // Decode the id_token to extract necessary information
   const decodedToken = jwt.decode(idToken);
 
@@ -31,7 +32,7 @@ const generateClientSecret = (idToken) => {
   };
 
   // Sign the JWT using the private key
-  const clientSecret = jwt.sign(jwtPayload, privateKey, {
+  const clientSecret = jwt.sign(jwtPayload, privateKeyContent, {
     algorithm: 'ES256',
     header: {
       kid: 'Bh6H7rHVmb', // Replace with the key ID from your .p8 file
