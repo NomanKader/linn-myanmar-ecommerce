@@ -47,12 +47,12 @@ const generateClientSecret = async(idToken) => {
 
 const AppleLoginTest = ({ ...rest }) => {
   // Callback function to handle successful Apple Sign In
-  const [secret,setClientSecret]=useState();
+  const [secret,setClientSecret]=useState('');
   const handleSuccess = async (response) => {
     try {
       // Generate client_secret using the id_token
       const clientSecret = generateClientSecret(response.authorization.id_token);
-      setClientSecret(clientSecret);
+      setClientSecret(JSON.stringify(clientSecret));
       // copyToClipboard(clientSecret);
       // console.log("Client secret"+clientSecret);
       // Make the cURL request
