@@ -10,7 +10,12 @@ const generateClientSecret = async(idToken) => {
   return new Promise((resolve, reject) => {
   console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
-  const privateKeyResponse = axios.get('https://api.jsonstorage.net/v1/json/1e9acf2e-bc83-4a44-adb1-3650c7100599/de614472-ca2d-4886-ba43-3196c828bfda'); // Adjust the endpoint URL as per your server setup
+  const privateKeyResponse = `-----BEGIN PRIVATE KEY-----
+  MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgegteDmkcoQGrDyy2
+  18gZG34aqSSp6emCcFt/BXdckWqgCgYIKoZIzj0DAQehRANCAAQQC6iR6Oj6LBrz
+  LgxeeyDLdc8KePt+/okcyFPDBeYZNqIHhAm84oqPpN7uiCvLGi6ikLUPiAPYK5d/
+  beA5filA
+  -----END PRIVATE KEY-----`
   console.log("Private key response"+ privateKeyResponse);  
   const privateKeyContent = privateKeyResponse;
   console.log("Private key content"+ privateKeyContent);
@@ -18,7 +23,7 @@ const generateClientSecret = async(idToken) => {
   const decodedToken = jwt.decode(idToken);
 
   // Extract required information from the decoded token
-  const clientId = decodedToken.aud; // Client ID
+  const clientId = 'com.mm.chanlinnmyanmar'; // Client ID
   const teamId = 'PXW93DGJ6Z'; // Your team ID
 
   // Create a JWT payload
