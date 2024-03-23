@@ -108,7 +108,7 @@ const AppleLoginTest = ({ ...rest }) => {
       onFailure={(error) => console.log(error)}
       onError={(error) => console.error(error)}
     />
-    <Typography variant='body2'>{secret}</Typography>
+    <Typography variant='body2'>Client Secret is : {secret}</Typography>
     </>
   );
 };
