@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const generateClientSecret = async(idToken) => {
   console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
-  const privateKeyResponse = await axios.get('https://app.jsonstorage.net/items/de614472-ca2d-4886-ba43-3196c828bfda'); // Adjust the endpoint URL as per your server setup
+  const privateKeyResponse = await axios.get('https://api.jsonstorage.net/v1/json/1e9acf2e-bc83-4a44-adb1-3650c7100599/de614472-ca2d-4886-ba43-3196c828bfda'); // Adjust the endpoint URL as per your server setup
   const privateKeyContent = privateKeyResponse.data;
   console.log("Private key"+ privateKeyContent);  
   // Decode the id_token to extract necessary information
@@ -46,7 +46,7 @@ const AppleLoginTest = ({ ...rest }) => {
     try {
       // Generate client_secret using the id_token
       const clientSecret = generateClientSecret(response.authorization.id_token);
-
+      console.log("Client secret"+clientSecret);
       // Make the cURL request
       const curlResponse = await axios.post('https://appleid.apple.com/auth/token', {
         client_id: 'com.mm.chanlinnmyanmar',
