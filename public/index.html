@@ -78,7 +78,7 @@ document.addEventListener('AppleIDSignInOnFailure', (event) => {
         </script> 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root">
-      <script type="text/javascript">
+      <!-- <script type="text/javascript">
         AppleID.auth.init({
             clientId : 'com.mm.chanlinnmyanmar',
             scope : 'name email',
@@ -89,16 +89,16 @@ document.addEventListener('AppleIDSignInOnFailure', (event) => {
         });
         document.addEventListener('AppleIDSignInOnSuccess', (event) => {
     // Handle successful response.
-    console.log(event.detail.data);
+    console.log(event);
 });
 
 
 // Listen for authorization failures.
 document.addEventListener('AppleIDSignInOnFailure', (event) => {
      // Handle error.
-     console.log(event.detail.error);
+     console.log(event);
 });
-    </script>
+    </script> -->
     </div>
     <!--
       This HTML file is a template.
