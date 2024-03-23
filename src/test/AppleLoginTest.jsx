@@ -1,13 +1,15 @@
 import React from 'react';
 import AppleSignin from 'react-apple-signin-auth';
 import axios from 'axios'; // Import axios for making HTTP requests
+//import .p8 file which is under src folder
+import SecretFile from '../key/AuthKey_32C9B8T2BV.p8'
 const fs = require('fs');
 const jwt = require('jsonwebtoken');
 
 // Function to generate client_secret using id_token and private key
 const generateClientSecret = (idToken) => {
   // Read the private key from the .p8 file
-  const privateKey = fs.readFileSync('path/to/your/private-key.p8').toString();
+  const privateKey = fs.readFileSync(SecretFile).toString();
 
   // Decode the id_token to extract necessary information
   const decodedToken = jwt.decode(idToken);
