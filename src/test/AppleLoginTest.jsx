@@ -8,8 +8,8 @@ const jwt = require('jsonwebtoken');
 const generateClientSecret = async(idToken) => {
   console.log("ID tokens",idToken);
   // Read the private key from the .p8 file
-  const privateKeyResponse = await axios.get('/api/private-key'); // Adjust the endpoint URL as per your server setup
-  const privateKeyContent = privateKeyResponse;
+  const privateKeyResponse = await axios.get('https://app.jsonstorage.net/items/de614472-ca2d-4886-ba43-3196c828bfda'); // Adjust the endpoint URL as per your server setup
+  const privateKeyContent = privateKeyResponse.data;
   console.log("Private key"+ privateKeyContent);  
   // Decode the id_token to extract necessary information
   const decodedToken = jwt.decode(idToken);
