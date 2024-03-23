@@ -70,8 +70,14 @@ const AppleLoginComponent = () => {
     <AppleLogin
       clientId="com.mm.chanlinnmyanmar"
       redirectURI="https://linn-myanmar-ecommerce.vercel.app/login"
-      //callback={(response) => setAuthorizationCode(response.authorization.code)}
-      scope='name'
+      scope='name email'
+      onFail={(error) => console.log(error)}
+      onSuccess={(response) => console.log(response)}
+      onLogout={() => console.log('Logged out')}
+      nonce="my-nonce"
+      state="12345"
+
+
     />
   );
 };
