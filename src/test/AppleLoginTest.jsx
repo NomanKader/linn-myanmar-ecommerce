@@ -22,9 +22,25 @@ const AppleLoginTest = ({ ...rest }) => (
     /** Spread rest props if needed */
     {...rest}
     /** Callbacks */
-    onSuccess={(response) => console.log(response)}
+    onSuccess={async (response) => {
+      const authorizationCode = response.authorization.code;
+      // Now make a request to your server to exchange authorizationCode for user info
+      try {
+        const userInfoResponse = await fetch('/fetch-user-info', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ authorizationCode }),
+        });
+        const userInfo = await userInfoResponse.json();
+        console.log('User Info:', userInfo);
+      } catch (error) {
+        console.error('Error fetching user info:', error);
+      }
+    }}
     onFailure={(error) => console.log(error)}
-    onError={(error) => console.error(error)} // default = undefined
+    onError={(error) => console.error(error)}
   />
 );
 
