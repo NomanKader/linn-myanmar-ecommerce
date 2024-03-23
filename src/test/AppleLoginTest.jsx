@@ -16,7 +16,7 @@ const generateClientSecret = (idToken) => {
 
   // Extract required information from the decoded token
   const clientId = decodedToken.aud; // Client ID
-  const teamId = 'your_team_id'; // Your team ID
+  const teamId = 'PXW93DGJ6Z'; // Your team ID
 
   // Create a JWT payload
   const currentTime = Math.floor(Date.now() / 1000);
