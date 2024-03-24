@@ -11,6 +11,7 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import ProductSearchPage from './pages/search/ProductSearchPage';
 import BlogDetailPage from "./pages/detail/BlogDetailPage";
 import AppleLoginTestPage from "./test/AppleLoginTest";
+import PointHistoryList from "./test/PointHistoryTestPage";
 const App=()=>{
   return(
     <Router>
@@ -27,6 +28,7 @@ const App=()=>{
       <Route exact path='/register' component={RegisterPage} /> 
       <Route exact path='/test/drawer' component={TestDrawerComponent} /> 
       <Route exact path='/test/applelogin' component={AppleLoginTestPage} /> 
+      <Route exact path='/test/pointhistory' component={PointHistoryList}/>
     </Switch>
     </Router>
   )

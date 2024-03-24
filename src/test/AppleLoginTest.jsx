@@ -21,7 +21,7 @@ const generateClientSecret = async(idToken) => {
   console.log("Private key content"+ privateKeyContent);
   // Decode the id_token to extract necessary information
   const decodedToken = jwt.decode(idToken);
-
+  console.log("Auth Code",decodedToken);
   // Extract required information from the decoded token
   const clientId = 'com.mm.chanlinnmyanmar'; // Client ID
   const teamId = 'PXW93DGJ6Z'; // Your team ID
@@ -54,6 +54,7 @@ const AppleLoginTest = ({ ...rest }) => {
 
   const handleSuccess = async (response) => {
     try {
+      console.log("Authorization Code"+response.authorization.code)
       // Generate client_secret using the id_token
       const generatedClientSecret = await generateClientSecret(response.authorization.id_token);
       setClientSecret(generatedClientSecret); // Set the client secret in state
